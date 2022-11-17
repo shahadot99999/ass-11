@@ -36,11 +36,13 @@ async function run() {
         const serviceCollection = client.db('doctorDb').collection('services');
         const appointmentCollection = client.db('doctorDb').collection('appointments');
 
-        app.post('/jwt', (req, res)=>{
+        app.post('/jwt', async (req, res)=>{
             const user= req.body;
             console.log(user);
-            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'})
+            const token = await jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'})
+            console.log(token);
             res.send({token})
+
         })
 
         app.get('/services', async (req, res) => {
