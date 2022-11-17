@@ -87,7 +87,7 @@ async function run() {
             res.send(result);
         })
 
-        app.delete('/appointments/:id', verifyJWT, async (req, res) => {
+        app.delete('/appointments/:id',  async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
             const result = await serviceCollection.deleteOne(query);
